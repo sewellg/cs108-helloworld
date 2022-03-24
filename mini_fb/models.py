@@ -7,7 +7,7 @@ class Profile(models.Model):
     first_name = models.TextField(blank=True)
     last_name = models.TextField(blank=True)
     city = models.TextField(blank=True)
-    email_address = models.TextField
+    email_address = models.TextField(blank=True)
     image_URL = models.URLField(blank=True)
 
     def __str__(self):
