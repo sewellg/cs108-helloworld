@@ -1,6 +1,6 @@
 ##### quotes/views.py #####
 
-from .models import Quote
+from .models import Quote, Person
 from django.views.generic import ListView, DetailView
 import random
 
@@ -30,4 +30,11 @@ class RandomQuotePageView(DetailView):
 		
         all_quotes = Quote.objects.all()
         return random.choice(all_quotes)
+
+class PersonPageView(DetailView):
+    '''Show all quotes and all images for one person.'''
+
+    model = Person
+    template_name = 'quotes/person.html'
+    context_object_name = 'person'
 		
