@@ -12,3 +12,18 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.last_name}, {self.first_name} \n City: {self.city} \n Email: {self.email_address}'
+
+    def get_status_messages(self):
+        return StatusMessage.objects.filter(profile=self)
+
+
+class StatusMessage(models.Model):
+    timestamp = models.DateTimeField(blank=False)
+    message = models.TextField(blank=False)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.timestamp}\n {self.message}\n {self.profile}'
+
+
+    
