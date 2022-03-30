@@ -2,6 +2,7 @@
 
 from django.db import models
 import random
+from django.urls import reverse
 
 class Person(models.Model):
     '''Encapsulate the concept of a person, who said some famous quote.'''
@@ -39,6 +40,10 @@ class Quote(models.Model):
     # data attributes of a quote:
     text = models.TextField(blank=True)
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        '''Return a URL to display this quote object.'''
+        return reverse("quote", kwargs={"pk": self.pk})
     
     
 
