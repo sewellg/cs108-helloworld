@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+
 
 # Create your models here.
 
@@ -9,6 +11,10 @@ class Profile(models.Model):
     city = models.TextField(blank=True)
     email_address = models.TextField(blank=True)
     image_URL = models.URLField(blank=True)
+    # birthday = models.DateField(blank=True)
+
+    def get_absolute_url(self):
+        return reverse('profiles')
 
     def __str__(self):
         return f'{self.last_name}, {self.first_name} \n City: {self.city} \n Email: {self.email_address}'
