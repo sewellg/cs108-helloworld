@@ -1,6 +1,8 @@
+from ast import Delete
+import profile
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
-from .models import Profile
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from .models import Profile, StatusMessage
 from.forms import CreateProfileForm, UpdateProfileForm, CreateStatusMessageForm
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -53,7 +55,7 @@ def post_status_message(request, pk):
         # print(request.POST) # for debugging at the console
 
         # create the form object from the request's POST data
-        form = CreateStatusMessageForm(request.POST or None)
+        form = CreateStatusMessageForm(request.POST or None, request.FILES or None)
 
         if form.is_valid():
 
@@ -68,10 +70,37 @@ def post_status_message(request, pk):
 
             status_message.timestamp = timezone.now()
 
+        
+
             # now commit to database
             status_message.save()
 
     # redirect the user to the show_profile_page view
     url = reverse('show_profile_page', kwargs={'pk': pk})
     return redirect(url)
+
+class DeleteStatusMessageView(DeleteView):
+    template_name = "mini_fb/delete_status_form.html"
+    model = StatusMessage
+    
+
+    def get_object(self):
+        # read the URL data values into variables
+        profile_pk = self.kwargs['profile_pk']
+        status_pk = self.kwargs['status_pk']
+        st_msg = StatusMessage.objects.get(pk=status_pk)
+
+        return st_msg
+
+    def get_success_url(self):
+        # read the URL data values into variables
+        profile_pk = self.kwargs['profile_pk']
+        status_pk = self.kwargs['status_pk']
+        url = reverse('show_profile_page', kwargs={'pk': profile_pk})
+        return url
+    def get_context_data(self, **kwargs):
+        context = super(DeleteStatusMessageView, self).get_context_data(**kwargs)
+        st_msg = StatusMessage.objects.get(pk=self.kwargs['status_pk'])
+        context['st_msg'] = st_msg
+        return context
 # Create your views here.

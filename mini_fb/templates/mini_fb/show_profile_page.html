@@ -28,7 +28,7 @@
         </tr>
     </table>
     <h3>New Status Message</h3>
-    <form action='{% url "post_status" profile.pk %}'' method="POST"> 
+    <form action='{% url "post_status" profile.pk %}'' method="POST" enctype="multipart/form-data"> 
         {% csrf_token %}
         
         <table>
@@ -57,6 +57,7 @@
                 {% if status.image %}
                 <td><img src='{{status.image.url}}' style='max-width: 600;'></td>
                 {% endif %}
+                <td><a href="{% url 'delete_status' profile_pk=profile.pk status_pk=status.pk %}">Delete</a></td>
             </tr>
         {% endfor %}
         

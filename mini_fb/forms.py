@@ -25,6 +25,9 @@ class UpdateProfileForm(forms.ModelForm):
         fields = ["birthday", "city", "email", "image_url"]
 
 class CreateStatusMessageForm(forms.ModelForm):
+
+    message = forms.CharField(label="Message")
+    image = forms.ImageField(required=False)
     class Meta:
         model = StatusMessage
-        fields = ["message"]
+        fields = ["message", "image"]
