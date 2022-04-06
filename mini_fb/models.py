@@ -12,6 +12,8 @@ class Profile(models.Model):
     email_address = models.TextField(blank=True)
     image_URL = models.URLField(blank=True)
     birthday = models.DateField(blank=True)
+    friends = models.ManyToManyField("self")
+
 
     def get_absolute_url(self):
         return reverse('profiles', kwargs={'pk':Profile.pk})
@@ -21,6 +23,13 @@ class Profile(models.Model):
 
     def get_status_messages(self):
         return StatusMessage.objects.filter(profile=self)
+
+    def get_friends(self):
+
+        friends = self.friends.all()
+        print(friends)
+        return friends
+
 
 
 class StatusMessage(models.Model):
