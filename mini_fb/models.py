@@ -11,10 +11,10 @@ class Profile(models.Model):
     city = models.TextField(blank=True)
     email_address = models.TextField(blank=True)
     image_URL = models.URLField(blank=True)
-    # birthday = models.DateField(blank=True)
+    birthday = models.DateField(blank=True)
 
     def get_absolute_url(self):
-        return reverse('profiles')
+        return reverse('profiles', kwargs={'pk':Profile.pk})
 
     def __str__(self):
         return f'{self.last_name}, {self.first_name} \n City: {self.city} \n Email: {self.email_address}'
@@ -27,6 +27,7 @@ class StatusMessage(models.Model):
     timestamp = models.DateTimeField(blank=False)
     message = models.TextField(blank=False)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    image = models.ImageField(blank=True)
 
     def __str__(self):
         return f'{self.timestamp}\n {self.message}\n {self.profile}'
