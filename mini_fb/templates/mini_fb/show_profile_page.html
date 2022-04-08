@@ -13,20 +13,25 @@
         </tr>
         <tr>
             {% if profile.email_address %}
-            <td>{{profile.email_address}}</td>
+            <td>Email: {{profile.email_address}}</td>
             {% endif %}
         </tr>
         <tr>
             {% if profile.city %}
-            <td>{{profile.city}}</td>
+            <td>Hometown: {{profile.city}}</td>
             {% endif %}
         </tr>
         <tr>
             {% if profile.birthday %}
-            <td>{{profile.birthday}}</td>
+            <td>Birthday: {{profile.birthday}}</td>
             {% endif %}
         </tr>
     </table>
+    <hr>
+    <a href='{% url "update_profile" profile.pk %}'>Edit this profile | </a>
+    <a href="{% url 'news_feed' profile.pk %}">Show {{profile.first_name}}'s News Feed | </a> 
+    <a href="{% url 'show_possible_friends' profile.pk %}">Find Friends</a> 
+    <hr>
     <h3>New Status Message</h3>
     <form action='{% url "post_status" profile.pk %}'' method="POST" enctype="multipart/form-data"> 
         {% csrf_token %}
@@ -40,6 +45,7 @@
         </table>
         
     </form>
+    <hr>
     <table>
         <col style="width:50%">
 	<col style="width:50%">
@@ -62,9 +68,7 @@
         {% endfor %}
         
     </table>
-    <h3>
-        <a href="{% url 'news_feed' profile.pk %}">Show {{profile.first_name}}'s News Feed</a> 
-        </h3>
+    <hr>
     <h3>{{profile.first_name}}'s Friend List</h3>
     <table>
         {% if profile.get_friends %}

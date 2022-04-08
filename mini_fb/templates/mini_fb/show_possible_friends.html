@@ -1,0 +1,38 @@
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+
+<h1>Mini Facebook</h1>
+
+<h3>
+    <a href="{% url 'show_profile_page' profile.pk %}">Back to {{profile.first_name}}'s profile</a>
+</h3>
+
+<h2>{{profile.first_name}}'s Friend Suggestions</h2>
+
+<table>
+    <colgroup>
+        <col span="1" style="width: 10%">
+        <col span="1" style="width: 30%">
+    </colgroup>
+{% for friend in profile.get_friend_suggestions %}
+
+    <form action="{% url 'add_friend' profile_pk=profile.pk friend_pk=friend.pk %}" enctype="multipart/form-data" method="POST">
+    <tr>
+        <td>
+            <a href="/mini_fb/profile/{{profile.pk}}">
+            {{friend.first_name}} {{friend.last_name}}
+        </a>
+        </td>
+        <td>
+            <div style="max-width:200; max-height:200; overflow:hidden">
+                <img src="{{friend.image_URL}}" style="max-width:200">
+            </div>
+        </td>
+    </tr>
+    </form>
+
+{% endfor %}
+</table>
+
+{% endblock %}

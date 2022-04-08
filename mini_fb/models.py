@@ -36,6 +36,9 @@ class Profile(models.Model):
         friend_news = StatusMessage.objects.filter(profile__in=friends)
         return friend_news
 
+    def get_friend_suggestions(self):
+        possible_friends = Profile.objects.exclude(pk__in=self.friends.all()).exclude(pk=self.pk)
+        return possible_friends
 
 
 class StatusMessage(models.Model):

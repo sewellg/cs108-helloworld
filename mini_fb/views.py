@@ -108,4 +108,17 @@ class ShowNewsFeedView(DetailView):
     template_name = "mini_fb/show_news_feed.html"
     model = Profile
 
+class ShowPossibleFriendsView(DetailView):
+    template_name = "mini_fb/show_possible_friends.html"
+    model = Profile
+def add_friend(request, profile_pk, friend_pk):
+    profile = Profile.objects.get(pk=profile_pk)
+    friend = Profile.objects.get(pk = friend_pk)
+    profile.friends.add(friend)
+    profile.save()
+    friend.save()
+    return reverse('show_profile_page', kwargs={"pk":profile_pk})
+
+
+
 # Create your views here.
