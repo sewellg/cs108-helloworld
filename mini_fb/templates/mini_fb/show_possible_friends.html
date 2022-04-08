@@ -18,6 +18,7 @@
 {% for friend in profile.get_friend_suggestions %}
 
     <form action="{% url 'add_friend' profile_pk=profile.pk friend_pk=friend.pk %}" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
     <tr>
         <td>
             <a href="/mini_fb/profile/{{profile.pk}}">
@@ -28,6 +29,9 @@
             <div style="max-width:200; max-height:200; overflow:hidden">
                 <img src="{{friend.image_URL}}" style="max-width:200">
             </div>
+        </td>
+        <td>
+            <input type="submit" value="Add Friend">
         </td>
     </tr>
     </form>
