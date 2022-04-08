@@ -1,0 +1,41 @@
+
+
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+
+<h1>Mini Facebook</h1>
+
+<h2>{{profile.first_name}}'s News Feed</h2>
+
+<table>
+    <colgroup>
+        <col span="1" style="width: 10%">
+        <col span="1" style="width: 10%">
+        <col span="1" style="width: 10%">
+        <col span="1" style="width: 70%">
+    </colgroup>
+{% for status in profile.get_news_feed %}
+
+    <tr>
+        <td>
+            {{status.timestamp}}
+        </td>
+        <td>
+            <a href="/mini_fb/profile/{{profile.pk}}">
+            {{status.profile.first_name}} {{status.profile.last_name}}
+        </a>
+        </td>
+        <td>
+            <div style="max-width:50; max-height:50; overflow:hidden">
+                <img src="{{status.profile.image_URL}}" style="max-width:50">
+            </div>
+        </td>
+        <td>{{status.message}}</td>
+
+    </tr>
+
+{% endfor %}
+</table>
+
+{% endblock %}

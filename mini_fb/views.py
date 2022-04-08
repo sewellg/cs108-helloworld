@@ -103,4 +103,9 @@ class DeleteStatusMessageView(DeleteView):
         st_msg = StatusMessage.objects.get(pk=self.kwargs['status_pk'])
         context['st_msg'] = st_msg
         return context
+
+class ShowNewsFeedView(DetailView):
+    template_name = "mini_fb/show_news_feed.html"
+    model = Profile
+
 # Create your views here.
