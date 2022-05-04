@@ -1,3 +1,7 @@
+# file: forms.py
+# author: Grace Sewell
+# description: views for final project
+
 from ast import Delete
 from django.shortcuts import render
 from .models import Restaurant, Cuisine, Customer, Menu_item, Reviews
@@ -71,6 +75,7 @@ class SearchResultsView(ListView):
         return Restaurant.objects.filter(name__icontains=query)
 
 class DeleteReviewView(DeleteView):
+    '''a failed attempt at deleting a review// not implemented'''
     template_name = "project/delete_review.html"
     model = Reviews
 

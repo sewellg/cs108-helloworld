@@ -1,3 +1,6 @@
+# file: forms.py
+# author: Grace Sewell
+# description: models for final project
 from django.db import models
 
 class Menu_item(models.Model):

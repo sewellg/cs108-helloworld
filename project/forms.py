@@ -1,3 +1,6 @@
+# file: forms.py
+# author: Grace Sewell
+# description: forms for final project
 from django import forms   
 from .models import Reviews, Restaurant
 
