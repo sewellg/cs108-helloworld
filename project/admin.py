@@ -1,4 +1,3 @@
-from tkinter import Menu
 from django.contrib import admin
 
 # Register your models here.
