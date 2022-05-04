@@ -2,7 +2,6 @@
 # author: Grace Sewell
 # description: views for final project
 
-from ast import Delete
 from django.shortcuts import render
 from .models import Restaurant, Cuisine, Customer, Menu_item, Reviews
 from django.views.generic import DetailView, ListView, CreateView, DeleteView
