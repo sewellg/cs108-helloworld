@@ -1,0 +1,13 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<h2>Search Results</h2>
+
+    <ul>
+        {% for restaurant in search %}
+        <li><a href='/project/restaurant/{{restaurant.pk}}'>{{restaurant.name}}</a></li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

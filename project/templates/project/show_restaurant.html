@@ -1,0 +1,136 @@
+<html>
+
+    {% extends 'project/base.html' %}
+
+    {% block content %}
+
+    <div class="row">
+        <div class="column" >
+            <h2>{{Restaurant.name}}</h2>
+            <p>
+                <table class="centertable">
+                    <tr>
+                        <td><img src="{{Restaurant.image}}" style="max-height: 243"></td>
+                    </tr>
+                    <tr>
+                        {% if Restaurant.email_contact %}
+                        <td>Email: {{Restaurant.email_contact}}</td>
+                        {% endif %}
+                    </tr>
+                    <!-- <tr>
+                        <td>
+                            <br />
+                        </td>
+                    </tr> -->
+                    <tr>
+                        <td>Price Range: {{Restaurant.price_range}}</td>
+                    </tr>
+                </table>
+            </p>
+        </div>
+        <div class="column">
+            <h2>Times</h2>
+            <p>
+                <table class="centertable">
+                  
+                    <tr>
+                        <td>Monday: {{Restaurant.mon_times}}</td>
+                    </tr>
+                    <tr>
+                        <td>Tuesday: {{Restaurant.tue_times}}</td>
+                    </tr>
+                    <tr>
+                        <td>Wednesday: {{Restaurant.wed_times}}</td>
+                    </tr>
+                    <tr>
+                        <td>Thursday: {{Restaurant.thur_times}}</td>
+                    </tr>
+                    <tr>
+                        <td>Friday: {{Restaurant.fri_times}}</td>
+                    </tr>
+                    <tr>
+                        <td>Saturday: {{Restaurant.sat_times}}</td>
+                    </tr>
+                    <tr>
+                        <td>Sunday: {{Restaurant.sun_times}}</td>
+                    </tr>
+                </table>
+            </p>
+        </div>
+    </div>
+    
+            <h3 style="border:1px solid; text-align:center; padding:10px"><a href="/project/restaurant/menu/{{Restaurant.pk}}">{{Restaurant.name}}'s Menu</a></h3>
+
+    <hr>
+    <div class="row">
+        <div class="column" >
+            
+            <h3>Write a Review</h3>
+            <p>
+            <form action='{% url "post_review" Restaurant.pk %}'' method="POST" enctype="multipart/form-data"> 
+            {% csrf_token %}
+        
+        <table class="centertable">
+            {{create_review_form.as_table}}
+        <tr>
+            <td></td> 
+            <td><input type="submit" value="Submit"></td>
+        </tr>
+        </table>
+        </form>
+    </p>
+    </div>
+    <div class="column">
+        <h3>Reviews</h3>
+        <table class="centertable">
+            <tr>
+                <th>Name</th>
+                <th>Rating</th>
+                <th>Review</th>
+            </tr>
+            {% for rv in Restaurant.get_reviews %}
+            <tr>
+                <td>{{rv.name}}</td>
+                <td>{{rv.stars}}</td>
+                <td>{{rv.content}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    </div>
+
+    <hr>
+    <table class="centertable">
+        <tr>
+            {% if Restaurant.website %}
+            <td>Website: <a href='{{Restaurant.website}}' target="_blank">{{Restaurant.website}}</a></td>
+            {% endif %}
+        </tr>
+        <tr>
+            {% if Restaurant.number %}
+            <td>Phone: {{Restaurant.number}}</td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Address: {{Restaurant.address}}</td>
+        </tr>
+    </table>
+    <hr>
+
+    
+    <h3 style="text-align:center">If you like {{Restaurant.name}}, you may also like:</h3>
+    <table class="centertable">
+        {% for rest in Restaurant.find_recommendations %}
+        <tr>
+            <td><img src="{{rest.image}}" style="max-height: 100"></td>
+            <td><a href="/project/restaurant/{{rest.pk}}"">{{rest.name}}</a></td>
+
+        </tr>
+        {% endfor %}
+    </table>
+
+    
+
+    {% endblock %}
+
+</html>

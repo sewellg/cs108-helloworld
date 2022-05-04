@@ -1,0 +1,68 @@
+<!-- project/base.html -->
+<html style="background-color:#FFF3F0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+    <style>
+        body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
+    .w3-bar-block .w3-bar-item {padding:20px}
+    .column {
+    text-align: center;
+    float: left;
+    width: 50%;
+    }
+
+    .row:after {
+    content: "";
+    display: table;
+    clear: both;
+    }
+
+    header {padding:10px;}
+    form {padding:10px;}
+    h2 {padding:10px; text-align: center;}
+    table {padding:10px; text-align: center;}
+    tr {padding:10px; border: 1px solid}
+    td {padding:10px;}
+    h1 {padding:10px; text-align: center;}
+    /* li {padding:10px; text-align: center;} */
+
+    table {
+  border-collapse: collapse;
+}
+
+
+
+    .centertable {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    }
+
+    .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    }
+    </style>
+    </head>
+    <head>
+        <title>RestaFinder</title>
+    </head>
+    <body>
+       <header style="border-bottom:black solid 1px">
+            <a href="{% url 'restaurants' %}">Home</a>
+        </header>
+              
+        <form style="border-bottom:black solid 1px" action="{% url 'search' %}" method="get" >
+            <input name="q" type="text" placeholder="Search...">
+        </form>
+        <!-- <hr style="color:black"> -->
+            
+
+    {% block content %}
+    {% endblock %}
+    </body>
+</html>
