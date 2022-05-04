@@ -1,4 +1,3 @@
-from .models import Profile
 from django.urls import path
 from .views import CreateProfileView, DeleteStatusMessageView, ShowAllProfilesView, ShowNewsFeedView, ShowPossibleFriendsView, ShowProfilePageView, UpdateProfileView, post_status_message, add_friend
 
